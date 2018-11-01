@@ -90,6 +90,8 @@ services:
     container_name: smtp_relay
     restart: always
     networks:
+      - internal_network
+      - external_network
     ports:
       - "25:25"
     environment:
