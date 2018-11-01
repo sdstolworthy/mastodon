@@ -95,7 +95,7 @@ services:
     ports:
       - "25:25"
     environment:
-      MAILNAME: social@social.stolworthy.app
+      MAILNAME: social@stolworthy.app
       RELAY_DOMAINS: web
       KEY_PATH: /etc/letsencrypt/live/social.stolworthy.app/privkey.pem
       CERT_PATH: /etc/letsencrypt/live/social.stolworthy.app/fullchain.pem
