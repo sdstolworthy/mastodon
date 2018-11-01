@@ -85,16 +85,18 @@ services:
     networks:
       - external_network
       - internal_network
-    smtp:
-      image: namshi/smtp
-      container_name: smtp_relay
-      restart: always
-      ports:
-       - "25:25"
-      environment:
-        MAILNAME: social@social.stolworthy.app
-        KEY_PATH: /etc/letsencrypt/live/social.stolworthy.app/privkey.pem
-        CERT_PATH: /etc/letsencrypt/live/social.stolworthy.app/fullchain.pem
+  smtp:
+    image: namshi/smtp
+    container_name: smtp_relay
+    restart: always
+    networks:
+    ports:
+      - "25:25"
+    environment:
+      MAILNAME: social@social.stolworthy.app
+      RELAY_DOMAINS: web
+      KEY_PATH: /etc/letsencrypt/live/social.stolworthy.app/privkey.pem
+      CERT_PATH: /etc/letsencrypt/live/social.stolworthy.app/fullchain.pem
 
 ## Uncomment to enable federation with tor instances along with adding the following ENV variables
 ## http_proxy=http://privoxy:8118
