@@ -85,20 +85,15 @@ services:
     networks:
       - external_network
       - internal_network
-  smtp:
-    image: namshi/smtp
-    container_name: smtp_relay
-    restart: always
-    networks:
-      - internal_network
-      - external_network
-    ports:
-      - "25:25"
-    environment:
-      MAILNAME: social@stolworthy.app
-      RELAY_DOMAINS: web
-      KEY_PATH: /etc/letsencrypt/live/social.stolworthy.app/privkey.pem
-      CERT_PATH: /etc/letsencrypt/live/social.stolworthy.app/fullchain.pem
+smtp:
+  image: mwader/postfix-relay
+  restart: always
+  networks:
+    - internal_network
+    - external_network
+  environment:
+    - POSTFIX_myhostname=smtp.domain.tld
+    - OPENDKIM_DOMAINS=smtp.domain.tld
 
 ## Uncomment to enable federation with tor instances along with adding the following ENV variables
 ## http_proxy=http://privoxy:8118
